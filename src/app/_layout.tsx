@@ -1,18 +1,27 @@
-import { DarkTheme, DefaultTheme, ThemeProvider } from 'expo-router';
-import * as SplashScreen from 'expo-splash-screen';
-import { useColorScheme } from 'react-native';
+// import { Stack } from "expo-router";
 
-import { AnimatedSplashOverlay } from '@/components/animated-icon';
-import AppTabs from '@/components/app-tabs';
+// export default function RootLayout() {
+//   // return <Stack />;
+//   return (
+//     <Stack>
+//       {/* Konfigurasi Header untuk Layar index */}
+//       <Stack.Screen
+//         name="index"
+//         options={{
+//           title: "Home",
+//           headerTitleAlign: "center",
+//         }}
+//       />
+//     </Stack>
+//   );
+// }
 
-SplashScreen.preventAutoHideAsync();
-
-export default function TabLayout() {
-  const colorScheme = useColorScheme();
+import { Stack } from "expo-router";
+export default function RootLayout() {
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <AnimatedSplashOverlay />
-      <AppTabs />
-    </ThemeProvider>
+    <Stack>
+      {/* Sembunyikan header stack agar header Tabs yang tampil */}
+      <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+    </Stack>
   );
 }
