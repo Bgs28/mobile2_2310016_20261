@@ -1,27 +1,21 @@
-// import { Stack } from "expo-router";
-
-// export default function RootLayout() {
-//   // return <Stack />;
-//   return (
-//     <Stack>
-//       {/* Konfigurasi Header untuk Layar index */}
-//       <Stack.Screen
-//         name="index"
-//         options={{
-//           title: "Home",
-//           headerTitleAlign: "center",
-//         }}
-//       />
-//     </Stack>
-//   );
-// }
-
 import { Stack } from "expo-router";
+
 export default function RootLayout() {
   return (
     <Stack>
-      {/* Sembunyikan header stack agar header Tabs yang tampil */}
-      <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+      {/* Layar pembuka & autentikasi menggunakan tampilan full-screen modern */}
+      <Stack.Screen name="index" options={{ headerShown: false }} />
+      <Stack.Screen name="register" options={{ headerShown: false }} />
+      <Stack.Screen name="login" options={{ headerShown: false }} />
+
+      {/* Grup Button Navigation (5 tab) setelah berhasil login */}
+      <Stack.Screen
+        name="(tabs)"
+        options={{
+          headerShown: false,
+          gestureEnabled: false,
+        }}
+      />
     </Stack>
   );
 }
