@@ -1,20 +1,21 @@
 import { getAuthSession, UserData } from "@/services/authService";
 import { homeStyles } from "@/styles/homeStyles";
 import { Ionicons } from "@expo/vector-icons";
-import { router, useLocalSearchParams } from "expo-router";
+import { router, useFocusEffect } from "expo-router";
 import { Alert, ScrollView, Text, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 
 export default function HomeScreen() {
-  const { email } = useLocalSearchParams<{ email?: string }>();
   const [user, setUser] = useState<UserData | null>(null);
 
-  useEffect(() => {
-    getAuthSession().then((session) => {
-      if (session) setUser(session.user);
-    });
-  }, []);
+  useFocusEffect(
+    useCallback(() => {
+      getAuthSession().then((session) => {
+        if (session) setUser(session.user);
+      });
+    }, []),
+  );
 
   const handleMenuPress = (menuName: string, targetRoute?: string) => {
     if (targetRoute) {
